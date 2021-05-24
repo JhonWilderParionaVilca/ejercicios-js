@@ -5,4 +5,4 @@
 
 
 ## 🧔 Sitios de los ejercicios
-- ![frontendMasters](https://frontendmasters.com/courses/deep-javascript-v3/type-check-exercise-solution/)
+- [frontendMasters](https://frontendmasters.com/courses/deep-javascript-v3/type-check-exercise-solution/)
