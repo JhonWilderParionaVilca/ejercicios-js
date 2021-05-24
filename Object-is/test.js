@@ -1,31 +1,24 @@
-// TODO: define polyfill for `Object.is(..)`
-
-function isNaN(v) {
-  return v?.toString() === "NaN";
-}
-
-function isNegativeZero(v) {
-  if (1 / v === -Infinity) {
-    return true;
-  }
-  return false;
-}
-
 if (!Object.is || true) {
   Object.is = function ObjectIs(value1, value2) {
+    const v1IsNegativeZero = isNegativeZero(value1);
+    const v2IsNegativeZero = isNegativeZero(value2);
+    if (v1IsNegativeZero || v2IsNegativeZero) {
+      return v1IsNegativeZero && v2IsNegativeZero;
+    }
+
     if (isNaN(value1)) {
       return isNaN(value2);
     }
 
-    if (isNegativeZero(value1)) {
-      return isNegativeZero(value2);
-    }
-    if (isNegativeZero(value2)) {
-      return false;
-    }
-
     return value1 === value2;
   };
+
+  function isNaN(value) {
+    return value !== value;
+  }
+  function isNegativeZero(value) {
+    return value === 0 && 1 / value === -Infinity;
+  }
 }
 
 // tests:
